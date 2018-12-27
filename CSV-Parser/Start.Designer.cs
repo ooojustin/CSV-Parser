@@ -24,7 +24,7 @@
         /// </summary>
         private void InitializeComponent() {
             this.ofd = new System.Windows.Forms.OpenFileDialog();
-            this.label1 = new System.Windows.Forms.Label();
+            this.lblFile = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.pnlColumnList = new System.Windows.Forms.Panel();
             this.btnContinue = new System.Windows.Forms.Button();
@@ -34,14 +34,14 @@
             // 
             this.ofd.Filter = "CSV files (*.csv)|*.csv";
             // 
-            // label1
+            // lblFile
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 9);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(61, 13);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "file: {0}";
+            this.lblFile.AutoSize = true;
+            this.lblFile.Location = new System.Drawing.Point(12, 9);
+            this.lblFile.Name = "lblFile";
+            this.lblFile.Size = new System.Drawing.Size(61, 13);
+            this.lblFile.TabIndex = 0;
+            this.lblFile.Text = "file: {0}";
             // 
             // label2
             // 
@@ -82,12 +82,12 @@
             this.Controls.Add(this.btnContinue);
             this.Controls.Add(this.pnlColumnList);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.lblFile);
             this.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ForeColor = System.Drawing.Color.White;
             this.Name = "Start";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "CSV Parser";
+            this.Text = "csv parser - column selection";
             this.Load += new System.EventHandler(this.OnLoad);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -96,7 +96,7 @@
 
         #endregion
         private System.Windows.Forms.OpenFileDialog ofd;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lblFile;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Panel pnlColumnList;
         private System.Windows.Forms.Button btnContinue;

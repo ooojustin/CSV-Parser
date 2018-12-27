@@ -131,6 +131,8 @@ namespace CSV_Parser {
 
             // it's good :)
             FilePath = ofd.FileName;
+            string fileName = Path.GetFileName(FilePath);
+            lblFile.Text = string.Format(lblFile.Text, fileName);
             return true;
 
         }
