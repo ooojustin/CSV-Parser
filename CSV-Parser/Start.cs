@@ -41,13 +41,21 @@ namespace CSV_Parser {
             }
 
             // find their indexes and columnl name to add to list
-            Variables.Columns = new Dictionary<string, int>();
+            Data.SelectedColumns = new Dictionary<string, int>();
             foreach (CheckBox selectedColumn in selectedColumns) {
                 string name = selectedColumn.Text;
                 int index = ColumnChecks.IndexOf(selectedColumn);
-                Variables.Columns.Add(name, index);
+                Data.SelectedColumns.Add(name, index);
                 Console.WriteLine(name + " => " + index);
             }
+
+            // store selected row data in different list
+            Data.SelectedRows = new List<string[]>();
+            foreach (string[] row in Data.Rows)
+                Data.SelectedRows.Add(row.SelectedData());
+
+            new Main().Show();
+            Close();
 
         }
 
@@ -89,11 +97,14 @@ namespace CSV_Parser {
                 const int X_OFFSET = 7;
                 int Y_OFFSET = 7;
 
-                // allow user to select important columns
                 ColumnChecks = new List<CheckBox>();
+                Data.Columns = new List<string>();
+
+                // allow user to select important columns
                 for (int i = 0; i < fields.Length; i++) {
 
                     string field = fields[i];
+                    Data.Columns.Add(field);
 
                     // initialize checkbox component
                     CheckBox cb = new CheckBox();
@@ -109,9 +120,9 @@ namespace CSV_Parser {
                 }
 
                 // store raw rows in list
-                Variables.Rows = new List<string[]>();
+                Data.Rows = new List<string[]>();
                 while (!parser.EndOfData)
-                    Variables.Rows.Add(parser.ReadFields());
+                    Data.Rows.Add(parser.ReadFields());
 
                 WindowState = FormWindowState.Normal;
                 TopMost = true;
