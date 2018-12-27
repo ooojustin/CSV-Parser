@@ -30,6 +30,7 @@
             this.btnAddCondition = new System.Windows.Forms.Button();
             this.btnRemoveCondition = new System.Windows.Forms.Button();
             this.pnlConditions = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGrid)).BeginInit();
             this.panel1.SuspendLayout();
             this.pnlConditions.SuspendLayout();
@@ -43,7 +44,7 @@
             this.dataGrid.GridColor = System.Drawing.Color.Black;
             this.dataGrid.Location = new System.Drawing.Point(0, 0);
             this.dataGrid.Name = "dataGrid";
-            this.dataGrid.Size = new System.Drawing.Size(917, 482);
+            this.dataGrid.Size = new System.Drawing.Size(917, 601);
             this.dataGrid.TabIndex = 0;
             this.dataGrid.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.CellFormatting);
             // 
@@ -56,7 +57,7 @@
             this.lbConditions.FormattingEnabled = true;
             this.lbConditions.Location = new System.Drawing.Point(0, 0);
             this.lbConditions.Name = "lbConditions";
-            this.lbConditions.Size = new System.Drawing.Size(507, 136);
+            this.lbConditions.Size = new System.Drawing.Size(384, 136);
             this.lbConditions.TabIndex = 1;
             // 
             // panel1
@@ -66,7 +67,7 @@
             this.panel1.Controls.Add(this.dataGrid);
             this.panel1.Location = new System.Drawing.Point(12, 169);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(919, 484);
+            this.panel1.Size = new System.Drawing.Size(919, 603);
             this.panel1.TabIndex = 2;
             // 
             // label2
@@ -82,9 +83,9 @@
             // 
             this.btnAddCondition.BackColor = System.Drawing.Color.Black;
             this.btnAddCondition.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAddCondition.Location = new System.Drawing.Point(527, 133);
+            this.btnAddCondition.Location = new System.Drawing.Point(404, 26);
             this.btnAddCondition.Name = "btnAddCondition";
-            this.btnAddCondition.Size = new System.Drawing.Size(403, 30);
+            this.btnAddCondition.Size = new System.Drawing.Size(116, 66);
             this.btnAddCondition.TabIndex = 4;
             this.btnAddCondition.Text = "add condition";
             this.btnAddCondition.UseVisualStyleBackColor = false;
@@ -94,9 +95,9 @@
             // 
             this.btnRemoveCondition.BackColor = System.Drawing.Color.Black;
             this.btnRemoveCondition.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnRemoveCondition.Location = new System.Drawing.Point(527, 96);
+            this.btnRemoveCondition.Location = new System.Drawing.Point(404, 98);
             this.btnRemoveCondition.Name = "btnRemoveCondition";
-            this.btnRemoveCondition.Size = new System.Drawing.Size(403, 31);
+            this.btnRemoveCondition.Size = new System.Drawing.Size(116, 66);
             this.btnRemoveCondition.TabIndex = 5;
             this.btnRemoveCondition.Text = "remove condition";
             this.btnRemoveCondition.UseVisualStyleBackColor = false;
@@ -108,15 +109,24 @@
             this.pnlConditions.Controls.Add(this.lbConditions);
             this.pnlConditions.Location = new System.Drawing.Point(12, 26);
             this.pnlConditions.Name = "pnlConditions";
-            this.pnlConditions.Size = new System.Drawing.Size(509, 138);
+            this.pnlConditions.Size = new System.Drawing.Size(386, 138);
             this.pnlConditions.TabIndex = 6;
+            // 
+            // label1
+            // 
+            this.label1.BackColor = System.Drawing.Color.White;
+            this.label1.Location = new System.Drawing.Point(530, 10);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(1, 154);
+            this.label1.TabIndex = 7;
             // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(10)))), ((int)(((byte)(10)))));
-            this.ClientSize = new System.Drawing.Size(943, 665);
+            this.ClientSize = new System.Drawing.Size(943, 784);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.pnlConditions);
             this.Controls.Add(this.btnRemoveCondition);
             this.Controls.Add(this.btnAddCondition);
@@ -144,5 +154,6 @@
         private System.Windows.Forms.Button btnRemoveCondition;
         private System.Windows.Forms.ListBox lbConditions;
         private System.Windows.Forms.Panel pnlConditions;
+        private System.Windows.Forms.Label label1;
     }
 }

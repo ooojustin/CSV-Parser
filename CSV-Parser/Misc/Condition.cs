@@ -67,7 +67,6 @@ namespace CSV_Parser {
                 switch (ConditionMode) {
 
                     case Mode.NOT_EQUAL_TO:
-                        Console.WriteLine(Value1.ToLower() + " != " + Value2.ToLower() + "?");
                         return Value1.ToLower() != Value2.ToLower();
 
                     case Mode.EQUAL_TO:
