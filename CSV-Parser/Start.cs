@@ -46,7 +46,6 @@ namespace CSV_Parser {
                 string name = selectedColumn.Text;
                 int index = ColumnChecks.IndexOf(selectedColumn);
                 Data.SelectedColumns.Add(name, index);
-                Console.WriteLine(name + " => " + index);
             }
 
             // store selected row data in different list
@@ -150,8 +149,8 @@ namespace CSV_Parser {
 
             // it's good :)
             FilePath = ofd.FileName;
-            string fileName = Path.GetFileName(FilePath);
-            lblFile.Text = string.Format(lblFile.Text, fileName);
+            Data.FileName = Path.GetFileName(FilePath);
+            lblFile.Text = string.Format(lblFile.Text, Data.FileName);
             return true;
 
         }

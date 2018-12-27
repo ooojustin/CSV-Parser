@@ -8,6 +8,8 @@ namespace CSV_Parser {
 
     public static class Data {
 
+        public static string FileName;
+
         public static Dictionary<string, int> SelectedColumns;
         public static List<string> Columns;
 

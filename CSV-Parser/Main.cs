@@ -17,20 +17,32 @@ namespace CSV_Parser {
         public Main() {
 
             InitializeComponent();
+            dataGrid.DataSource = data;
+
+            Text = string.Format(Text, Data.FileName, Data.SelectedRows.Count);
 
             // add columns to data table
             foreach (KeyValuePair<string, int> column in Data.SelectedColumns)
                 data.Columns.Add(column.Key, typeof(string));
 
-            // add each row to the data table
+            UpdateRows();
+
+        }
+
+        private void UpdateRows() {
+
+            data.Clear();
+
             foreach (string[] rowData in Data.SelectedRows) {
+
                 DataRow row = data.NewRow();
+
                 for (int i = 0; i < Data.SelectedColumns.Count; i++)
                     row[i] = rowData[i];
-                data.Rows.Add(row);
-            }
 
-            dataGrid.DataSource = data;
+                data.Rows.Add(row);
+
+            }
 
         }
 
