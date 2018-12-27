@@ -16,6 +16,7 @@ namespace CSV_Parser {
 
         private string FilePath;
         private List<CheckBox> ColumnChecks;
+        private Dictionary<string, int> Columns;
 
         public Start() {
 
@@ -31,17 +32,43 @@ namespace CSV_Parser {
 
         }
 
-        private void Failed(string reason) {
-            MessageBox.Show(reason, "CSV Parser", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            Close();
+        private void Continue(object sender, EventArgs e) {
+
+            // get a list of selected columns
+            List<CheckBox> selectedColumns = SelectedColumns();
+            if (selectedColumns.Count == 0) {
+                Failed("Please select at least 1 column.");
+                return;
+            }
+
+            // find their indexes and columnl name to add to list
+            Columns = new Dictionary<string, int>();
+            foreach (CheckBox selectedColumn in selectedColumns) {
+                string name = selectedColumn.Text;
+                int index = ColumnChecks.IndexOf(selectedColumn);
+                Columns.Add(name, index);
+                Console.WriteLine(name + " => " + index);
+            }
+
         }
 
-        private void Start_Load(object sender, EventArgs e) {
+        private List<CheckBox> SelectedColumns() {
+
+            List<CheckBox> checkedColumns = new List<CheckBox>();
+            foreach (CheckBox cb in ColumnChecks)
+                if (cb.Checked)
+                    checkedColumns.Add(cb);
+
+            return checkedColumns;
+
+        }
+
+        private void OnLoad(object sender, EventArgs e) {
 
             // make sure they've selected a csv file
             bool selected = SelectCSV();
             if (!selected) {
-                Failed("Issue occurred while selecting .csv file.");
+                Failed("Issue occurred while selecting .csv file.", true);
                 return;
             }
 
@@ -51,7 +78,7 @@ namespace CSV_Parser {
                 parser.TextFieldType = FieldType.Delimited;
                 parser.SetDelimiters(",");
                 if (parser.EndOfData) {
-                    Failed("Unable to resolve .csv data columns.");
+                    Failed("Unable to resolve .csv data columns.", true);
                     return;
                 }
 
@@ -106,6 +133,12 @@ namespace CSV_Parser {
             FilePath = ofd.FileName;
             return true;
 
+        }
+
+        private void Failed(string reason, bool close = false) {
+            MessageBox.Show(reason, "CSV Parser", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            if (close)
+                Close();
         }
 
     }

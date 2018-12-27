@@ -27,7 +27,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.pnlColumnList = new System.Windows.Forms.Panel();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnContinue = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // ofd
@@ -61,16 +61,17 @@
             this.pnlColumnList.Size = new System.Drawing.Size(353, 157);
             this.pnlColumnList.TabIndex = 2;
             // 
-            // button1
+            // btnContinue
             // 
-            this.button1.BackColor = System.Drawing.Color.Black;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Location = new System.Drawing.Point(15, 207);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(353, 27);
-            this.button1.TabIndex = 3;
-            this.button1.Text = "continue";
-            this.button1.UseVisualStyleBackColor = false;
+            this.btnContinue.BackColor = System.Drawing.Color.Black;
+            this.btnContinue.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnContinue.Location = new System.Drawing.Point(15, 207);
+            this.btnContinue.Name = "btnContinue";
+            this.btnContinue.Size = new System.Drawing.Size(353, 27);
+            this.btnContinue.TabIndex = 3;
+            this.btnContinue.Text = "continue";
+            this.btnContinue.UseVisualStyleBackColor = false;
+            this.btnContinue.Click += new System.EventHandler(this.Continue);
             // 
             // Start
             // 
@@ -78,7 +79,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(10)))), ((int)(((byte)(10)))));
             this.ClientSize = new System.Drawing.Size(380, 248);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btnContinue);
             this.Controls.Add(this.pnlColumnList);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -87,7 +88,7 @@
             this.Name = "Start";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "CSV Parser";
-            this.Load += new System.EventHandler(this.Start_Load);
+            this.Load += new System.EventHandler(this.OnLoad);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -98,7 +99,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Panel pnlColumnList;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnContinue;
     }
 }
 
