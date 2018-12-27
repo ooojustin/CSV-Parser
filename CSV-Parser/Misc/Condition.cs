@@ -17,7 +17,10 @@ namespace CSV_Parser {
         public double Value1_Numeric = Double.NaN;
         public double Value2_Numeric = Double.NaN;
 
+        public bool IsCustom = false;
         public bool IsNumeric = false;
+
+        public Condition() { }
 
         public Condition(string value1, string value2, Mode mode) {
             Value1 = value1;
@@ -82,6 +85,18 @@ namespace CSV_Parser {
 
             return false;
 
+        }
+
+        public string GetDescription() {
+            if (IsNumeric && IsCustom) // + +
+                return string.Format("[{0}] {1} [\"{2}\"]", Value1, ConditionMode_Numeric.GetString(), Value2);
+            else if (IsNumeric && !IsCustom) // + -
+                return string.Format("[{0}] {1} [{2}]", Value1, ConditionMode_Numeric.GetString(), Value2);
+            else if (!IsNumeric && IsCustom) // - +
+                return string.Format("[{0}] {1} [\"{2}\"]", Value1, ConditionMode.GetString(), Value2);
+            else if (!IsNumeric && !IsCustom) // --
+                return string.Format("[{0}] {1} [{2}]", Value1, ConditionMode.GetString(), Value2);
+            return string.Empty;
         }
 
     }

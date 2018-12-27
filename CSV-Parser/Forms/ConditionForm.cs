@@ -16,6 +16,7 @@ namespace CSV_Parser {
         public ModeNumeric ConditionMode_Numeric;
 
         public bool IsNumeric = false;
+        public bool IsCustom = false;
 
         public string Value1 = string.Empty;
         public string Value2 = string.Empty;
@@ -102,8 +103,8 @@ namespace CSV_Parser {
             Value1 = cmbValue1.SelectedItem.ToString();
 
             // set value 2 (and ensure its numeric, if condition is numeric)
-            bool isCustom = IsCustomValue();
-            if (isCustom) {
+            IsCustom = IsCustomValue();
+            if (IsCustom) {
                 Value2 = txtCustomValue.Text;
                 if (IsNumeric && !Value2.IsNumeric()) {
                     MessageBox.Show("custom value must be numeric.", "CSV Parser", MessageBoxButtons.OK, MessageBoxIcon.Warning);

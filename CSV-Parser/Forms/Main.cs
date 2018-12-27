@@ -10,16 +10,11 @@ using System.Windows.Forms;
 
 namespace CSV_Parser {
 
-    // column name 1, column name 2 (or custom value), mode
-    using StandardCondition = Tuple<string, string, Mode>;
-    using NumericCondition = Tuple<string, string, ModeNumeric>;
 
     public partial class Main : Form {
 
         DataTable data = new DataTable();
-
-        List<StandardCondition> standardConditions = new List<StandardCondition>();
-        List<NumericCondition> numericConditions = new List<NumericCondition>();
+        List<Condition> conditions = new List<Condition>();
 
 
         public Main() {
@@ -47,33 +42,20 @@ namespace CSV_Parser {
                 bool evaluate = true;
 
                 // evaluate standard conditions
-                foreach (StandardCondition condition in standardConditions) {
+                foreach (Condition condition in conditions) {
 
-                    string value1 = rowData[Data.SelectedColumns[condition.Item1]];
-                    string value2 = condition.Item2;
+                    string value1 = rowData[Data.SelectedColumns[condition.Value1]];
+                    string value2 = condition.Value2;
 
-                    if (Data.SelectedColumns.ContainsKey(condition.Item2))
-                        value2 = rowData[Data.SelectedColumns[condition.Item2]];
+                    if (!condition.IsCustom)
+                        value2 = rowData[Data.SelectedColumns[condition.Value2]];
 
-                    Condition c = new Condition(value1, value2, condition.Item3);
-                    if (!c.Evaluate()) {
-                        evaluate = false;
-                        break;
-                    }
+                    Condition c = null;
+                    if (condition.IsNumeric)
+                        c = new Condition(Convert.ToDouble(value1), Convert.ToDouble(value2), condition.ConditionMode_Numeric);
+                    else
+                        c = new Condition(value1, value2, condition.ConditionMode);
 
-                }
-
-                // evaluate numeric conditions
-                foreach (NumericCondition condition in numericConditions) {
-
-                    string value1 = rowData[Data.SelectedColumns[condition.Item1]];
-                    string value2 = condition.Item2;
-
-                    if (Data.SelectedColumns.ContainsKey(condition.Item2))
-                        value2 = rowData[Data.SelectedColumns[condition.Item2]];
-
-
-                    Condition c = new Condition(Convert.ToDouble(value1), Convert.ToDouble(value2), condition.Item3);
                     if (!c.Evaluate()) {
                         evaluate = false;
                         break;
@@ -110,20 +92,36 @@ namespace CSV_Parser {
             DialogResult result = form.ShowDialog(this);
 
             if (result == DialogResult.OK) {
+           
+                Condition c = new Condition();
+                c.IsCustom = form.IsCustom;
+                c.IsNumeric = form.IsNumeric;
+                c.Value1 = form.Value1;
+                c.Value2 = form.Value2;
+                if (c.IsNumeric)
+                    c.ConditionMode_Numeric = form.ConditionMode_Numeric;
+                else
+                    c.ConditionMode = form.ConditionMode;
 
-                if (form.IsNumeric) {
-                    NumericCondition condition = new NumericCondition(form.Value1, form.Value2, form.ConditionMode_Numeric);
-                    numericConditions.Add(condition);
-                    lbConditions.Items.Add(condition.Item1 + " [" + condition.Item3.GetString() + "] " + condition.Item2);
-                } else {
-                    StandardCondition condition = new StandardCondition(form.Value1, form.Value2, form.ConditionMode);
-                    standardConditions.Add(condition);
-                    lbConditions.Items.Add(condition.Item1 + " [" + condition.Item3.GetString() + "] " + condition.Item2);
-                }
+                lbConditions.Items.Add(c.GetDescription());
+                conditions.Add(c);
 
                 UpdateRows();
 
             }
+
+        }
+
+        private void btnRemoveCondition_Click(object sender, EventArgs e) {
+
+            int index = lbConditions.SelectedIndex;
+            if (index == -1)
+                return;
+
+            lbConditions.Items.RemoveAt(index);
+            conditions.RemoveAt(index);
+
+            UpdateRows();
 
         }
 
