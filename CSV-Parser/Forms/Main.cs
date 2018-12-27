@@ -46,6 +46,19 @@ namespace CSV_Parser {
 
         }
 
+        private void CellFormatting(object sender, DataGridViewCellFormattingEventArgs e) {
+
+            DataGridViewRow row = dataGrid.Rows[e.RowIndex];
+
+            row.DefaultCellStyle.BackColor = Color.Black;
+            row.DefaultCellStyle.SelectionBackColor = Color.Magenta;
+
+        }
+
+        private void btnAddCondition_Click(object sender, EventArgs e) {
+            new ConditionForm().ShowDialog(this);
+        }
+
     }
 
 }

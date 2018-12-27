@@ -109,6 +109,7 @@ namespace CSV_Parser {
                     CheckBox cb = new CheckBox();
                     cb.Location = new Point(X_OFFSET, Y_OFFSET);
                     cb.AutoSize = true;
+                    cb.Checked = true;
                     cb.Text = field;
 
                     // add to panel and account for y offset/padding

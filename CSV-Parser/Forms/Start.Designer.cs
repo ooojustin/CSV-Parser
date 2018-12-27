@@ -58,14 +58,14 @@
             this.pnlColumnList.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlColumnList.Location = new System.Drawing.Point(15, 44);
             this.pnlColumnList.Name = "pnlColumnList";
-            this.pnlColumnList.Size = new System.Drawing.Size(353, 157);
+            this.pnlColumnList.Size = new System.Drawing.Size(353, 377);
             this.pnlColumnList.TabIndex = 2;
             // 
             // btnContinue
             // 
             this.btnContinue.BackColor = System.Drawing.Color.Black;
             this.btnContinue.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnContinue.Location = new System.Drawing.Point(15, 207);
+            this.btnContinue.Location = new System.Drawing.Point(15, 427);
             this.btnContinue.Name = "btnContinue";
             this.btnContinue.Size = new System.Drawing.Size(353, 27);
             this.btnContinue.TabIndex = 3;
@@ -78,7 +78,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(10)))), ((int)(((byte)(10)))));
-            this.ClientSize = new System.Drawing.Size(380, 248);
+            this.ClientSize = new System.Drawing.Size(380, 466);
             this.Controls.Add(this.btnContinue);
             this.Controls.Add(this.pnlColumnList);
             this.Controls.Add(this.label2);
