@@ -124,10 +124,10 @@
         #endregion
 
         private System.Windows.Forms.DataGridView dataGrid;
-        private System.Windows.Forms.ListBox lbConditions;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btnAddCondition;
         private System.Windows.Forms.Button btnRemoveCondition;
+        private System.Windows.Forms.ListBox lbConditions;
     }
 }

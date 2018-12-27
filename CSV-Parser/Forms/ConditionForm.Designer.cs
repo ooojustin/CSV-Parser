@@ -30,6 +30,7 @@
             this.cmbValue2 = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.btnCreateCondition = new System.Windows.Forms.Button();
+            this.txtCustomValue = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // label1
@@ -86,6 +87,7 @@
             this.cmbValue2.Name = "cmbValue2";
             this.cmbValue2.Size = new System.Drawing.Size(376, 21);
             this.cmbValue2.TabIndex = 6;
+            this.cmbValue2.SelectedIndexChanged += new System.EventHandler(this.Value2_Changed);
             // 
             // label3
             // 
@@ -106,6 +108,18 @@
             this.btnCreateCondition.TabIndex = 7;
             this.btnCreateCondition.Text = "create condition";
             this.btnCreateCondition.UseVisualStyleBackColor = false;
+            this.btnCreateCondition.Click += new System.EventHandler(this.btnCreateCondition_Click);
+            // 
+            // txtCustomValue
+            // 
+            this.txtCustomValue.BackColor = System.Drawing.Color.Black;
+            this.txtCustomValue.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtCustomValue.ForeColor = System.Drawing.Color.White;
+            this.txtCustomValue.Location = new System.Drawing.Point(170, 144);
+            this.txtCustomValue.Name = "txtCustomValue";
+            this.txtCustomValue.Size = new System.Drawing.Size(231, 20);
+            this.txtCustomValue.TabIndex = 8;
+            this.txtCustomValue.Visible = false;
             // 
             // ConditionForm
             // 
@@ -113,11 +127,12 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(10)))), ((int)(((byte)(10)))));
             this.ClientSize = new System.Drawing.Size(427, 246);
+            this.Controls.Add(this.cmbValue2);
+            this.Controls.Add(this.txtCustomValue);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnCreateCondition);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.cmbValue1);
-            this.Controls.Add(this.cmbValue2);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.cmbCondition);
             this.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -138,5 +153,6 @@
         private System.Windows.Forms.ComboBox cmbValue2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button btnCreateCondition;
+        private System.Windows.Forms.TextBox txtCustomValue;
     }
 }
