@@ -13,9 +13,8 @@ namespace CSV_Parser {
 
     public partial class Main : Form {
 
-        DataTable data = new DataTable();
-        List<Condition> conditions = new List<Condition>();
-
+        public DataTable data = new DataTable();
+        public List<Condition> conditions = new List<Condition>();
 
         public Main() {
 
@@ -125,6 +124,9 @@ namespace CSV_Parser {
 
         }
 
+        private void btnSumColumn_Click(object sender, EventArgs e) {
+            new SumColumn(this).Show();
+        }
     }
 
 }

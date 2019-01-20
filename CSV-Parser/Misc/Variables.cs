@@ -41,6 +41,18 @@ namespace CSV_Parser {
 
         }
 
+        public static bool IsNumeric(this string value) {
+            double test = Double.NaN;
+            bool isNumeric = Double.TryParse(value, out test);
+            return isNumeric;
+        }
+
+        public static bool IsColumnNumeric(string name) {
+            int columnIndex = Data.SelectedColumns[name];
+            string sampleData = Data.Rows.First()[columnIndex];
+            return sampleData.IsNumeric();
+        }
+
     }
 
 }

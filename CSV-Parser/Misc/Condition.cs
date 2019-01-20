@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CSV_Parser {
 
-    class Condition {
+    public class Condition {
 
         public Mode ConditionMode;
         public ModeNumeric ConditionMode_Numeric;
@@ -145,12 +145,6 @@ namespace CSV_Parser {
 
             return (TEnum)Enum.ToObject(type, Enum.GetValues(type).Cast<int>().Last());
 
-        }
-
-        public static bool IsNumeric(this string value) {
-            double test = Double.NaN;
-            bool isNumeric = Double.TryParse(value, out test);
-            return isNumeric;
         }
 
     }

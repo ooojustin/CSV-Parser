@@ -44,7 +44,7 @@ namespace CSV_Parser {
 
             // check if it's numeric
             string columnName = cmbValue1.SelectedItem.ToString();
-            IsNumeric = IsColumnNumeric(columnName);
+            IsNumeric = Data.IsColumnNumeric(columnName);
 
             // clear conditions & second values
             cmbCondition.Items.Clear();
@@ -58,7 +58,7 @@ namespace CSV_Parser {
                     cmbCondition.Items.Add(mode.GetString());
                 }
                 foreach (KeyValuePair<string, int> column in Data.SelectedColumns)
-                    if (IsColumnNumeric(column.Key))
+                    if (Data.IsColumnNumeric(column.Key))
                         cmbValue2.Items.Add(column.Key);
             } else {
                 int maxValue = (int)ConditionExtensions.GetMaxValue<Mode>();
@@ -73,12 +73,6 @@ namespace CSV_Parser {
             cmbValue2.Items.Add("Custom");
             cmbCondition.SelectedIndex = 0;
 
-        }
-
-        private bool IsColumnNumeric(string name) {
-            int columnIndex = Data.SelectedColumns[name];
-            string sampleData = Data.Rows.First()[columnIndex];
-            return sampleData.IsNumeric();
         }
 
         private void Value2_Changed(object sender, EventArgs e) {
