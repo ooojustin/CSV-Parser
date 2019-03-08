@@ -32,6 +32,7 @@
             this.pnlConditions = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.btnSumColumn = new System.Windows.Forms.Button();
+            this.btnExportData = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGrid)).BeginInit();
             this.panel1.SuspendLayout();
             this.pnlConditions.SuspendLayout();
@@ -133,12 +134,25 @@
             this.btnSumColumn.UseVisualStyleBackColor = false;
             this.btnSumColumn.Click += new System.EventHandler(this.btnSumColumn_Click);
             // 
+            // btnExportData
+            // 
+            this.btnExportData.BackColor = System.Drawing.Color.Black;
+            this.btnExportData.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnExportData.Location = new System.Drawing.Point(541, 69);
+            this.btnExportData.Name = "btnExportData";
+            this.btnExportData.Size = new System.Drawing.Size(140, 37);
+            this.btnExportData.TabIndex = 9;
+            this.btnExportData.Text = "export data";
+            this.btnExportData.UseVisualStyleBackColor = false;
+            this.btnExportData.Click += new System.EventHandler(this.btnExportData_Click);
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(10)))), ((int)(((byte)(10)))));
             this.ClientSize = new System.Drawing.Size(943, 784);
+            this.Controls.Add(this.btnExportData);
             this.Controls.Add(this.btnSumColumn);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.pnlConditions);
@@ -170,5 +184,6 @@
         private System.Windows.Forms.Panel pnlConditions;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnSumColumn;
+        private System.Windows.Forms.Button btnExportData;
     }
 }

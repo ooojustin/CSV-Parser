@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -127,6 +128,34 @@ namespace CSV_Parser {
         private void btnSumColumn_Click(object sender, EventArgs e) {
             new SumColumn(this).Show();
         }
+
+        private void btnExportData_Click(object sender, EventArgs e) {
+
+            StringBuilder builder = new StringBuilder();
+
+            // add column names
+            foreach (var column in Data.SelectedColumns)
+                builder.Append(column.Key + ",");
+            NextLine(builder);
+
+            // add column data
+            foreach (string[] row in Data.SelectedRows) {
+                foreach (string column in row)
+                    builder.Append(column + ",");
+                NextLine(builder);
+            }
+
+            File.WriteAllText("exported.csv", builder.ToString());
+            MessageBox.Show("Data exported to exported.csv", "CSV Parser", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+        }
+
+        private static void NextLine(StringBuilder builder) {
+            builder.Remove(builder.Length - 1, 1);
+            builder.AppendLine();
+        }
+
+
     }
 
 }
