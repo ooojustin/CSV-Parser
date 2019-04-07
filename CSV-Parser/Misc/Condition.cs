@@ -135,6 +135,37 @@ namespace CSV_Parser {
 
     public static class ConditionExtensions {
 
+        public static bool Evaluates(this string[] row, List<Condition> conditions) {
+
+            foreach (Condition condition in conditions) {
+
+                string value1 = row[Data.SelectedColumns[condition.Value1]];
+                string value2 = condition.Value2;
+
+                if (!condition.IsCustom)
+                    value2 = row[Data.SelectedColumns[condition.Value2]];
+
+                Condition c = null;
+                try {
+                    if (condition.IsNumeric)
+                        c = new Condition(Convert.ToDouble(value1), Convert.ToDouble(value2), condition.ConditionMode_Numeric);
+                    else if (condition.IsDate)
+                        c = new Condition(DateTime.Parse(value1), value2, condition.ConditionMode_Date);
+                    else
+                        c = new Condition(value1, value2, condition.ConditionMode);
+                } catch (Exception) {
+                    return false;
+                }
+
+                if (!c.Evaluate())
+                    return false;
+
+            }
+
+            return true;
+
+        }
+
         public static string GetString(this Mode mode) {
             switch (mode) {
                 case Mode.NOT_EQUAL_TO:

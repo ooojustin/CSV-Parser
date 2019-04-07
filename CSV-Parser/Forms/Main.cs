@@ -39,38 +39,7 @@ namespace CSV_Parser {
             for (int x = 0; x < Data.Rows.Count; x++) {
 
                 string[] rowData = Data.Rows[x];
-                bool evaluate = true;
-
-                // evaluate standard conditions
-                foreach (Condition condition in conditions) {
-
-                    string value1 = rowData[Data.SelectedColumns[condition.Value1]];
-                    string value2 = condition.Value2;
-
-                    if (!condition.IsCustom)
-                        value2 = rowData[Data.SelectedColumns[condition.Value2]];
-
-                    Condition c = null;
-                    try {
-                        if (condition.IsNumeric)
-                            c = new Condition(Convert.ToDouble(value1), Convert.ToDouble(value2), condition.ConditionMode_Numeric);
-                        else if (condition.IsDate)
-                            c = new Condition(DateTime.Parse(value1), value2, condition.ConditionMode_Date);
-                        else
-                            c = new Condition(value1, value2, condition.ConditionMode);
-                    } catch (Exception) {
-                        evaluate = false;
-                        break;
-                    }
-
-                    if (!c.Evaluate()) {
-                        evaluate = false;
-                        break;
-                    }
-
-                }
-
-                if (!evaluate)
+                if (!rowData.Evaluates(conditions))
                     continue;
 
                 DataRow row = data.NewRow();
