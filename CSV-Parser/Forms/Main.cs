@@ -119,6 +119,8 @@ namespace CSV_Parser {
 
             // add column data
             foreach (string[] row in Data.SelectedRows) {
+                if (!row.Evaluates(conditions))
+                    continue;
                 foreach (string column in row)
                     builder.Append(column + ",");
                 NextLine(builder);
