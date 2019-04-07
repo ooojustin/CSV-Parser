@@ -165,6 +165,13 @@ namespace CSV_Parser {
             builder.AppendLine();
         }
 
+        // original window size: 959, 823
+        // original data grid size: 917, 601
+        private void Main_Resize(object sender, EventArgs e) {
+            int widthDelta = Size.Width - 959;
+            int heightDelta = Size.Height - 823;
+            pnlDataGrid.Size = new Size(917 + widthDelta, 601 + heightDelta);
+        }
 
     }
 
