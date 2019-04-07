@@ -52,6 +52,17 @@ namespace CSV_Parser {
             string sampleData = Data.Rows.First()[columnIndex];
             return sampleData.IsNumeric();
         }
+        
+        public static bool IsColumnDate(string name) {
+            int columnIndex = Data.SelectedColumns[name];
+            string sampleData = Data.Rows.First()[columnIndex];
+            try {
+                DateTime dt = DateTime.Parse(sampleData);
+                return true;
+            } catch {
+                return false;
+            }
+        }
 
     }
 

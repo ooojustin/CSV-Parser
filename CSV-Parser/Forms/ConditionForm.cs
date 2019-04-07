@@ -14,7 +14,9 @@ namespace CSV_Parser {
 
         public Mode ConditionMode;
         public ModeNumeric ConditionMode_Numeric;
+        public ModeDate ConditionMode_Date;
 
+        public bool IsDate = false;
         public bool IsNumeric = false;
         public bool IsCustom = false;
 
@@ -45,6 +47,7 @@ namespace CSV_Parser {
             // check if it's numeric
             string columnName = cmbValue1.SelectedItem.ToString();
             IsNumeric = Data.IsColumnNumeric(columnName);
+            IsDate = Data.IsColumnDate(columnName);
 
             // clear conditions & second values
             cmbCondition.Items.Clear();
@@ -52,13 +55,22 @@ namespace CSV_Parser {
 
             // re-add conditions based on whether or not the column contains numeric values
             if (IsNumeric) {
-                int maxValue = (int) ConditionExtensions.GetMaxValue<ModeNumeric>();
+                int maxValue = (int)ConditionExtensions.GetMaxValue<ModeNumeric>();
                 for (int i = 0; i <= maxValue; i++) {
                     ModeNumeric mode = (ModeNumeric)i;
                     cmbCondition.Items.Add(mode.GetString());
                 }
                 foreach (KeyValuePair<string, int> column in Data.SelectedColumns)
                     if (Data.IsColumnNumeric(column.Key))
+                        cmbValue2.Items.Add(column.Key);
+            } else if (IsDate) {
+                int maxValue = (int)ConditionExtensions.GetMaxValue<ModeDate>();
+                for (int i = 0; i <= maxValue; i++) {
+                    ModeDate mode = (ModeDate)i;
+                    cmbCondition.Items.Add(mode.GetString());
+                }
+                foreach (KeyValuePair<string, int> column in Data.SelectedColumns)
+                    if (Data.IsColumnDate(column.Key))
                         cmbValue2.Items.Add(column.Key);
             } else {
                 int maxValue = (int)ConditionExtensions.GetMaxValue<Mode>();
@@ -109,9 +121,11 @@ namespace CSV_Parser {
 
             // establish condition mode
             if (IsNumeric)
-                ConditionMode_Numeric = (ModeNumeric) cmbCondition.SelectedIndex;
+                ConditionMode_Numeric = (ModeNumeric)cmbCondition.SelectedIndex;
+            else if (IsDate)
+                ConditionMode_Date = (ModeDate)cmbCondition.SelectedIndex;
             else
-                ConditionMode = (Mode) cmbCondition.SelectedIndex;
+                ConditionMode = (Mode)cmbCondition.SelectedIndex;
 
             DialogResult = DialogResult.OK;
             Close();

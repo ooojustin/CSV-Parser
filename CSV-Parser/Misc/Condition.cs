@@ -9,16 +9,20 @@ namespace CSV_Parser {
     public class Condition {
 
         public Mode ConditionMode;
-        public ModeNumeric ConditionMode_Numeric;
-
         public string Value1 = string.Empty;
         public string Value2 = string.Empty;
 
+        public ModeNumeric ConditionMode_Numeric;
         public double Value1_Numeric = Double.NaN;
         public double Value2_Numeric = Double.NaN;
 
+        public ModeDate ConditionMode_Date;
+        public DateTime? Value1_Date = null;
+        public string Value2_Date = string.Empty;
+
         public bool IsCustom = false;
         public bool IsNumeric = false;
+        public bool IsDate = false;
 
         public Condition() { }
 
@@ -34,6 +38,13 @@ namespace CSV_Parser {
             Value2_Numeric = value2;
             ConditionMode_Numeric = mode;
             IsNumeric = true;
+        }
+
+        public Condition(DateTime value1, string value2, ModeDate mode) {
+            Value1_Date = value1;
+            Value2_Date = value2;
+            ConditionMode_Date = mode;
+            IsDate = true;  
         }
 
         public bool Evaluate() {
@@ -62,6 +73,21 @@ namespace CSV_Parser {
 
                 }
 
+            } else if (IsDate) {
+
+                switch (ConditionMode_Date) {
+
+                    case ModeDate.MONTH_EQUAL_TO:
+                        return Value1_Date.Value.Month.ToString() == Value2_Date;
+
+                    case ModeDate.DAY_EQUAL_TO:
+                        return Value1_Date.Value.Day.ToString() == Value2_Date;
+
+                    case ModeDate.YEAR_EQUAL_TO:
+                        return Value1_Date.Value.Year.ToString() == Value2_Date;
+
+                }
+
             } else {
 
                 switch (ConditionMode) {
@@ -87,15 +113,22 @@ namespace CSV_Parser {
         }
 
         public string GetDescription() {
-            if (IsNumeric && IsCustom) // + +
-                return string.Format("[{0}] {1} [\"{2}\"]", Value1, ConditionMode_Numeric.GetString(), Value2);
-            else if (IsNumeric && !IsCustom) // + -
-                return string.Format("[{0}] {1} [{2}]", Value1, ConditionMode_Numeric.GetString(), Value2);
-            else if (!IsNumeric && IsCustom) // - +
-                return string.Format("[{0}] {1} [\"{2}\"]", Value1, ConditionMode.GetString(), Value2);
-            else if (!IsNumeric && !IsCustom) // --
-                return string.Format("[{0}] {1} [{2}]", Value1, ConditionMode.GetString(), Value2);
-            return string.Empty;
+            if (IsNumeric) {
+                if (IsCustom)
+                    return string.Format("[{0}] {1} [\"{2}\"]", Value1, ConditionMode_Numeric.GetString(), Value2);
+                else
+                    return string.Format("[{0}] {1} [{2}]", Value1, ConditionMode_Numeric.GetString(), Value2);
+            } else if (IsDate) {
+                if (IsCustom)
+                    return string.Format("[{0}] {1} [\"{2}\"]", Value1, ConditionMode_Date.GetString(), Value2);
+                else
+                    return string.Format("[{0}] {1} [{2}]", Value1, ConditionMode_Date.GetString(), Value2);
+            } else {
+                if (IsCustom)
+                    return string.Format("[{0}] {1} [\"{2}\"]", Value1, ConditionMode.GetString(), Value2);
+                else
+                    return string.Format("[{0}] {1} [{2}]", Value1, ConditionMode.GetString(), Value2);
+            }
         }
 
     }
@@ -134,6 +167,18 @@ namespace CSV_Parser {
             return string.Empty;
         }
 
+        public static string GetString(this ModeDate mode) {
+            switch (mode) {
+                case ModeDate.MONTH_EQUAL_TO:
+                    return "month is equal to";
+                case ModeDate.DAY_EQUAL_TO:
+                    return "day is equal to";
+                case ModeDate.YEAR_EQUAL_TO:
+                    return "year is equal to";
+            }
+            return string.Empty;
+        }
+
         public static TEnum GetMaxValue<TEnum>() where TEnum : IComparable, IConvertible, IFormattable {
 
             Type type = typeof(TEnum);
@@ -163,6 +208,12 @@ namespace CSV_Parser {
         LESS_THAN, // 3
         GREATER_THAN_EQUAL_TO, // 4
         LESS_THAN_EQUAL_TO // 5
+    }
+
+    public enum ModeDate {
+        MONTH_EQUAL_TO, // 0
+        DAY_EQUAL_TO, // 1
+        YEAR_EQUAL_TO // 2
     }
 
 }

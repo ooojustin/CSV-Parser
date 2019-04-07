@@ -51,10 +51,17 @@ namespace CSV_Parser {
                         value2 = rowData[Data.SelectedColumns[condition.Value2]];
 
                     Condition c = null;
-                    if (condition.IsNumeric)
-                        c = new Condition(Convert.ToDouble(value1), Convert.ToDouble(value2), condition.ConditionMode_Numeric);
-                    else
-                        c = new Condition(value1, value2, condition.ConditionMode);
+                    try {
+                        if (condition.IsNumeric)
+                            c = new Condition(Convert.ToDouble(value1), Convert.ToDouble(value2), condition.ConditionMode_Numeric);
+                        else if (condition.IsDate)
+                            c = new Condition(DateTime.Parse(value1), value2, condition.ConditionMode_Date);
+                        else
+                            c = new Condition(value1, value2, condition.ConditionMode);
+                    } catch (Exception) {
+                        evaluate = false;
+                        break;
+                    }
 
                     if (!c.Evaluate()) {
                         evaluate = false;
@@ -96,10 +103,13 @@ namespace CSV_Parser {
                 Condition c = new Condition();
                 c.IsCustom = form.IsCustom;
                 c.IsNumeric = form.IsNumeric;
+                c.IsDate = form.IsDate;
                 c.Value1 = form.Value1;
                 c.Value2 = form.Value2;
                 if (c.IsNumeric)
                     c.ConditionMode_Numeric = form.ConditionMode_Numeric;
+                else if (c.IsDate)
+                    c.ConditionMode_Date = form.ConditionMode_Date;
                 else
                     c.ConditionMode = form.ConditionMode;
 
